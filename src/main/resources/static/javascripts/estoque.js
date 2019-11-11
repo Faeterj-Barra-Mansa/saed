@@ -1,0 +1,99 @@
+var Estoque = Estoque || {};
+
+Estoque.MaskMoney = (function() {
+	
+	function MaskMoney() {
+		this.decimal = $('.js-decimal');
+		this.plain = $('.js-plain');
+	}
+	
+	MaskMoney.prototype.enable = function() {
+		this.decimal.maskMoney({ decimal: ',', thousands: '.' });
+		this.plain.maskMoney({ precision: 0, thousands: '.' });
+	}
+	
+	return MaskMoney;
+	
+}());
+
+Estoque.MaskPhoneNumber = (function() {
+	
+	function MaskPhoneNumber() {
+		this.inputPhoneNumber = $('.js-phone-number');
+	}
+	
+	MaskPhoneNumber.prototype.enable = function() {
+		var maskBehavior = function (val) {
+		  return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+		};
+		
+		var options = {
+		  onKeyPress: function(val, e, field, options) {
+		      field.mask(maskBehavior.apply({}, arguments), options);
+		    }
+		};
+		
+		this.inputPhoneNumber.mask(maskBehavior, options);
+	}
+	
+	return MaskPhoneNumber;
+	
+}());
+
+Estoque.MaskCep = (function() {
+	
+	function MaskCep() {
+		this.inputCep = $('.js-cep');
+	}
+	
+	MaskCep.prototype.enable = function() {
+		this.inputCep.mask('00.000-000');
+	}
+	
+	return MaskCep;
+	
+}());
+
+Estoque.MaskDate = (function() {
+	
+	function MaskDate() {
+		this.inputDate = $('.js-date');
+	}
+	
+	MaskDate.prototype.enable = function() {
+		this.inputDate.mask('00/00/0000');
+		this.inputDate.datepicker({
+			orientation: 'bottom',
+			language: 'pt-BR',
+			autoclose: true
+		});
+	}
+	
+	return MaskDate;
+	
+}());
+
+numeral.language('pt-br');
+
+Estoque.formatarMoeda = function(valor) {
+	return numeral(valor).format('0,0.00');
+}
+
+Estoque.recuperarValor = function(valorFormatado) {
+	return numeral().unformat(valorFormatado);
+}
+
+$(function() {
+	var maskMoney = new Estoque.MaskMoney();
+	maskMoney.enable();
+	
+	var maskPhoneNumber = new Estoque.MaskPhoneNumber();
+	maskPhoneNumber.enable();
+	
+	var maskCep = new Estoque.MaskCep();
+	maskCep.enable();
+	
+	var maskDate = new Estoque.MaskDate();
+	maskDate.enable();
+	
+});
