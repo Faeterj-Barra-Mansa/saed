@@ -35,13 +35,15 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
 import com.github.mxab.thymeleaf.extras.dataattribute.dialect.DataAttributeDialect;
 import com.google.common.cache.CacheBuilder;
 
+import br.gov.rj.faetec.saed.curso.controller.CursoController;
+import br.gov.rj.faetec.saed.curso.repository.Cursos;
 import br.gov.rj.faetec.saed.usuario.controller.UsuariosController;
 import br.gov.rj.faetec.saed.webapp.controller.SegurancaController;
 import br.gov.rj.faetec.saed.webapp.thymeleaf.EstoqueDialect;
 import nz.net.ultraq.thymeleaf.LayoutDialect;
 
 @Configuration
-@ComponentScan(basePackageClasses = { UsuariosController.class, SegurancaController.class })
+@ComponentScan(basePackageClasses = { UsuariosController.class, SegurancaController.class, CursoController.class })
 @EnableWebMvc
 @EnableSpringDataWebSupport
 public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationContextAware {

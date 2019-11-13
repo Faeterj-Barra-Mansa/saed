@@ -16,14 +16,16 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import br.gov.rj.faetec.saed.curso.model.Curso;
+import br.gov.rj.faetec.saed.curso.repository.Cursos;
 import br.gov.rj.faetec.saed.usuario.model.Usuario;
 import br.gov.rj.faetec.saed.usuario.repository.Usuarios;
 
 
 @Configuration
-@ComponentScan(basePackageClasses = Usuarios.class)
+@ComponentScan(basePackageClasses = { Usuarios.class, Cursos.class })
 // Nos repositórios do JPA está sendo desabilitada a transação default
-@EnableJpaRepositories(basePackageClasses = Usuarios.class, enableDefaultTransactions = false) 
+@EnableJpaRepositories(basePackageClasses = { Usuarios.class, Cursos.class }, enableDefaultTransactions = false) 
 //Com a anotação abaixo, a transação no banco de dados, deixa de ser automática. 
 //É necessário declarar na classe CadastroProdutoService a notação @Transactional
 @EnableTransactionManagement 
@@ -51,7 +53,9 @@ public class JPAConfig {
 		LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
 		factory.setDataSource(dataSource);
 		factory.setJpaVendorAdapter(jpaVendorAdapter);
-		factory.setPackagesToScan(Usuario.class.getPackage().getName());
+		factory.setPackagesToScan(Usuario.class.getPackage().getName(),
+				Curso.class.getPackage().getName()
+				);
 		factory.afterPropertiesSet();
 		return factory.getObject();
 	}
