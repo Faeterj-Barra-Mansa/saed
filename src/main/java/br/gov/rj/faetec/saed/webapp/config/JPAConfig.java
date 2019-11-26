@@ -20,12 +20,12 @@ import br.gov.rj.faetec.saed.disciplina.model.Disciplina;
 import br.gov.rj.faetec.saed.disciplina.repository.Disciplinas;
 import br.gov.rj.faetec.saed.usuario.model.Usuario;
 import br.gov.rj.faetec.saed.usuario.repository.Usuarios;
-
+import br.gov.rj.faetec.saed.webapp.paginacao.PaginacaoUtil;
 
 @Configuration
-@ComponentScan(basePackageClasses = { Usuarios.class, Disciplinas.class})
+@ComponentScan(basePackageClasses = { Usuarios.class, Disciplinas.class, PaginacaoUtil.class})
 // Nos repositórios do JPA está sendo desabilitada a transação default
-@EnableJpaRepositories(basePackageClasses = { Usuarios.class, Disciplinas.class }, enableDefaultTransactions = false) 
+@EnableJpaRepositories(basePackageClasses = { Usuarios.class, Disciplinas.class, PaginacaoUtil.class }, enableDefaultTransactions = false) 
 //Com a anotação abaixo, a transação no banco de dados, deixa de ser automática. 
 //É necessário declarar na classe CadastroProdutoService a notação @Transactional
 @EnableTransactionManagement 

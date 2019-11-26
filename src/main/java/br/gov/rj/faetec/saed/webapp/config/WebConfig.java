@@ -36,7 +36,6 @@ import com.github.mxab.thymeleaf.extras.dataattribute.dialect.DataAttributeDiale
 import com.google.common.cache.CacheBuilder;
 
 import br.gov.rj.faetec.saed.curso.controller.CursoController;
-import br.gov.rj.faetec.saed.curso.repository.Cursos;
 import br.gov.rj.faetec.saed.disciplina.controller.DisciplinaController;
 import br.gov.rj.faetec.saed.usuario.controller.UsuariosController;
 import br.gov.rj.faetec.saed.webapp.controller.SegurancaController;

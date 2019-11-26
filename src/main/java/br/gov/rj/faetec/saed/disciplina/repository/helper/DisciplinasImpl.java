@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -24,15 +25,14 @@ public class DisciplinasImpl implements DisciplinasQueries {
 	@PersistenceContext
 	private EntityManager manager;
 	
-//	@Autowired
-//	private PaginacaoUtil paginacaoUtil;
+	@Autowired
+	private PaginacaoUtil paginacaoUtil;
 	
 	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional(readOnly = true)
 	public Page<Disciplina> filtrar(DisciplinaFilter filtro, Pageable pageable) {
 		Criteria criteria = manager.unwrap(Session.class).createCriteria(Disciplina.class);
-		PaginacaoUtil paginacaoUtil = new PaginacaoUtil();
 		paginacaoUtil.preparar(criteria, pageable);
 		adicionarFiltro(filtro, criteria);
 		
