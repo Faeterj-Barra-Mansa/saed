@@ -44,7 +44,7 @@ import nz.net.ultraq.thymeleaf.LayoutDialect;
 
 @Configuration
 @ComponentScan(basePackageClasses = { UsuariosController.class, SegurancaController.class, CursoController.class,
-		DisciplinaController.class})
+		CursoController.class, DisciplinaController.class})
 @EnableWebMvc
 @EnableSpringDataWebSupport
 public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationContextAware {
