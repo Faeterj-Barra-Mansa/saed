@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org"
+	layout:decorate="~{layout/LayoutPadrao}"
+	xmlns:estoque="http://estoque.faetec.rj.gov.br">
+	
+<head>
+	<title>Cadastro de Disciplina</title>
+</head>
+
+<body>
+<section layout:fragment="conteudo">
+
+	<div class="page-header">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-10">
+					<h1 th:if="${disciplina.novo}">Cadastro de Disciplina</h1>
+					<h1 th:unless="${disciplina.novo}" th:text="|Edição do ${disciplina.descricao}|">Edição de Disciplina</h1>
+				</div>
+			
+				<div class="col-sm-2">
+					<div class="aw-page-header-controls">
+						<a class="btn  btn-default" th:href="@{/disciplinas}">
+							<i class="glyphicon  glyphicon-plus-sign"></i> <span class="hidden-xs  hidden-sm">Pesquisa</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+
+		<th:block th:include="fragments/MensagemSucesso"></th:block>
+
+		<form method="POST" th:object="${disciplina}" class="form-vertical  js-form-loading" 
+		th:action="${disciplina.novo} ? @{/disciplinas/novo} : @{/disciplinas/{id}(id=${disciplina.id})}">
+			<th:block th:include="fragments/MensagensErroValidacao"></th:block>
+			
+			<input type="hidden" th:field="*{id}"/>
+	
+			<div class="row">
+				<div class="col-sm-2  form-group" estoque:classforerror="codigo">
+					<label for="codigo" class="control-label">Codigo</label>
+					<input id="codigo" type="text" class="form-control" th:field="*{codigo}"/>
+				</div>
+				
+				<div class="col-sm-10  form-group" estoque:classforerror="descricao">
+					<label for="descricao" class="control-label">Descrição</label>
+					<input id="descricao" type="text" class="form-control" th:field="*{descricao}"/>
+				</div>
+			</div>						
+						
+			<div class="form-group">
+				<button class="btn  btn-primary" type="submit">Salvar</button>
+				<button class="btn  btn-primary" type="reset">Limpar</button>
+			</div>
+	
+		</form>
+	</div>
+	
+</section>
+
+<th:block layout:fragment="javascript-extra">
+</th:block>
+		
+</body>
+</html>
