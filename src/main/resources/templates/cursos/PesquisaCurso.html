@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:data="http://www.thymeleaf.org/extras/data"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="~{layout/LayoutPadrao}"
+	xmlns:estoque="http://estoque.faetec.rj.gov.br">
+	
+<head>
+	<title>Pesquisa de Cursos</title>
+</head>
+
+<body>
+<section layout:fragment="conteudo">
+	<div class="page-header">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-10"><br><br>
+					<h1>Pesquisa de Cursos</h1>
+				</div>
+				
+				<div class="col-xs-2">
+					<div class="aw-page-header-controls">
+						<a class="btn  btn-default" th:href="@{/cursos/novo}">
+							<i class="glyphicon  glyphicon-plus-sign"></i> <span class="hidden-xs  hidden-sm">Novo Curso</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div><br>
+	
+	<div class="container-fluid">
+		<form method="GET" th:object="${cursoFilter}">
+			<div class="row">
+				<div class="form-group  col-sm-6">
+					<label class="control-label" for="nome">Nome</label>
+					<input type="text" class="form-control" id="nome" autofocus="autofocus" th:field="*{nome}"/>
+				</div>
+				</div><br>
+				
+			<button type="submit" class="btn  btn-primary">Pesquisar</button>
+		</form>
+		
+		<div class="table-responsive  bw-tabela-simples">
+			<table class="table  table-hover">
+				<thead>
+					<tr>
+						<th class="table-curso-col-nome">
+							<estoque:order page="${pagina}" field="nome" text="Nome"/>
+						</th>
+						
+						<th class="table-nome-col-nome">
+						Opções
+						</th>										
+						
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr th:each="curso : ${pagina.conteudo}">
+						<td class="text-left" th:text="${curso.nome}">AA1234</td>
+						<td th:text="${curso.nome}">curso</td>						
+						<td class="text-center">
+							<a class="btn  btn-link  btn-xs  js-tooltip" title="Editar" 
+									th:href="@{/curso/{nome}(nome=${curso.nome})}"> 
+								<i class="glyphicon glyphicon-pencil"></i>
+							</a>							
+							<a class="btn  btn-link  btn-xs  js-tooltip  js-exclusao-btn" title="Excluir" 						
+							        href="#"  
+									data:url="@{/curso/{nome}(nome=${curso.nome})}"
+									data:objeto="${curso.nome}">
+								<i class="glyphicon glyphicon-remove"></i>
+							</a>
+						</td>
+					</tr>
+					<tr th:if="${pagina.vazia}">
+						<td colspan="7">Nenhuma curso encontrado</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+		<div class="col-sm-12  text-center" th:if="${not pagina.vazia}">
+			<nav>
+				<ul class="pagination  pagination-sm" th:with="paginaAtual=${pagina.atual}">
+					<li th:class="${pagina.primeira} ? disabled">
+						<a th:href="${pagina.urlParaPagina(paginaAtual - 1)}" th:remove="${pagina.primeira} ? tag"><span>&laquo;</span></a>
+					</li>
+					<th:block th:each="p : ${#numbers.sequence(1, pagina.total)}" th:with="numeroPagina=${p - 1}">
+						<li th:class="${paginaAtual == numeroPagina} ? active">
+							<a th:href="${pagina.urlParaPagina(numeroPagina)}">[[${p}]]</a>
+						</li>
+					</th:block>
+					
+					<li th:class="${pagina.ultima} ? disabled">
+						<a th:href="${pagina.urlParaPagina(paginaAtual + 1)}" th:remove="${pagina.ultima} ? tag"><span>&raquo;</span></a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+		
+	</div>
+	
+</section>
+</body>
+</html>

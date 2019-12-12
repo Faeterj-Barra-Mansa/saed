@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	xmlns:th="http://www.thymeleaf.org"
 	layout:decorate="~{layout/LayoutPadrao}"
 	xmlns:estoque="http://estoque.faetec.rj.gov.br">
+	<meta charset="utf-8">
 	
 <head>
 	<title>Cadastro de Curso</title>
@@ -16,8 +17,8 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-sm-10">
-					<h1 th:if="${curso.novo}">Cadastro de Curso</h1>
-					<h1 th:unless="${curso.novo}" th:text="|Edição do ${curso.descricao}|">Edição de Curso</h1>
+					<h1 th:if="${curso.novo}">Cadastro de Cursos</h1>
+					<h1 th:unless="${curso.novo}" th:text="|Edição do ${curso.nome}|">Edição de Cursos</h1>
 				</div>
 			
 				<div class="col-sm-2">
@@ -42,15 +43,37 @@
 			<input type="hidden" th:field="*{id}"/>
 	
 			<div class="row">
-				<div class="col-sm-2  form-group" estoque:classforerror="codigo">
-					<label for="codigo" class="control-label">Codigo</label>
-					<input id="codigo" type="text" class="form-control" th:field="*{codigo}"/>
+				<div class="col-sm-2  form-group" estoque:classforerror="id">
+					<label for="id" class="control-label">Codigo</label>
+					<input id="id" type="text" class="form-control" th:field="*{id}"/>
 				</div>
 				
-				<div class="col-sm-10  form-group" estoque:classforerror="descricao">
-					<label for="descricao" class="control-label">Descrição</label>
-					<input id="descricao" type="text" class="form-control" th:field="*{descricao}"/>
+				<div class="col-sm-10  form-group" estoque:classforerror="nome">
+					<label for="nome" class="control-label">Nome</label>
+					<input id="nome" type="text" class="form-control" th:field="*{nome}"/>
 				</div>
+				
+				<div class="col-sm-10  form-group" estoque:classforerror="conteudo_prog">
+					<label for="conteudo_prog" class="control-label">Conteudo Programatico</label>
+					<input id="conteudo_prog" type="text" class="form-control" th:field="*{conteudo_prog}"/>
+				</div>
+				
+				<div class="col-sm-10  form-group" estoque:classforerror="carga_horaria">
+					<label for="carga_horaria" class="control-label">Carga Horaria</label>
+					<input id="carga_horaria" type="text" class="form-control" th:field="*{carga_horaria}"/>
+				</div>
+				
+				<div class="col-sm-10  form-group" estoque:classforerror="cadastrado_por">
+					<label for="cadastrado_por" class="control-label">Matr. Funcionario</label>
+					<input id="cadastrado_por" type="text" class="form-control" th:field="*{cadastrado_por}"/>
+				</div>
+				
+				<div class="col-sm-10  form-group" estoque:classforerror="data_cadastro">
+					<label for="data_cadastro" class="control-label">Data Cadastro</label>
+					<input id="data_cadastro" type="text" class="form-control" th:field="*{data_cadastro}"/>
+				</div>
+				
+				
 			</div>						
 						
 			<div class="form-group">

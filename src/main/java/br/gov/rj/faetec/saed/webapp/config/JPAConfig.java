@@ -23,13 +23,14 @@ import br.gov.rj.faetec.saed.disciplina.repository.Disciplinas;
 import br.gov.rj.faetec.saed.usuario.model.Usuario;
 import br.gov.rj.faetec.saed.usuario.repository.Usuarios;
 import br.gov.rj.faetec.saed.webapp.paginacao.PaginacaoUtil;
-
+import br.gov.rj.faetec.saed.turma.model.Turma;
+import br.gov.rj.faetec.saed.turma.repository.Turmas;
 @Configuration
 @ComponentScan(basePackageClasses = { Usuarios.class, Disciplinas.class,
-		Cursos.class, PaginacaoUtil.class})
+		Cursos.class, Turmas.class, PaginacaoUtil.class})
 // Nos repositórios do JPA está sendo desabilitada a transação default
 @EnableJpaRepositories(basePackageClasses = { Usuarios.class, Disciplinas.class,
-		Cursos.class, PaginacaoUtil.class }, enableDefaultTransactions = false) 
+		Cursos.class, Turmas.class, PaginacaoUtil.class }, enableDefaultTransactions = false) 
 //Com a anotação abaixo, a transação no banco de dados, deixa de ser automática. 
 //É necessário declarar na classe CadastroProdutoService a notação @Transactional
 @EnableTransactionManagement 
@@ -59,7 +60,8 @@ public class JPAConfig {
 		factory.setJpaVendorAdapter(jpaVendorAdapter);
 		factory.setPackagesToScan(Usuario.class.getPackage().getName(),
 				Disciplina.class.getPackage().getName(),
-				Curso.class.getPackage().getName()
+				Curso.class.getPackage().getName(),
+				Turma.class.getPackage().getName()
 				);
 		factory.afterPropertiesSet();
 		return factory.getObject();
